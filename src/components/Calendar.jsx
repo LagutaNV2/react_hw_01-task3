@@ -5,17 +5,23 @@ import 'moment/locale/ru';
 const Calendar = ({ date }) => {
   const currentDate = moment(date).locale('ru');
 
-  console.log('Calendar instance locale:', currentDate.locale());
-  console.log('Calendar locale:', moment.locale());
-  console.log(moment(date).format('LLLL'));
-  console.log(moment(date).localeData().longDateFormat('LLLL'));
-
+  // console.log('Calendar instance locale:', currentDate.locale());
+  // console.log('Calendar locale:', moment.locale());
+  // console.log(moment(date).format('LLLL'));
+  // console.log(currentDate.format('LLLL'));
+  // console.log(moment(date).localeData().longDateFormat('LLLL'));
 
   const currentDayOfWeek = currentDate.format('dddd');
   const currentDayNum = currentDate.date();
-  const currentMonthGenitive = currentDate.format('MMMM');
+
   const currentYear = currentDate.year();
-  const currentMonthNominative = currentDate.format('MMMM').replace(/.$/, '');
+
+  // Получаем месяц в именительном падеже (март, апрель, октябрь)
+  const currentMonthNominative = currentDate.format('MMMM');
+
+  // Получаем месяц в родительном падеже (марта, апреля, октября)
+  const currentMonthGenitive = moment(date).format('D MMMM').split(' ')[1];
+
 
   // Генерация массива дней для календаря
   const startOfMonth = currentDate.clone().startOf('month');
